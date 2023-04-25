@@ -7,6 +7,8 @@ import GameDetails from "./GameDetails";
 import { useState } from "react";
 import { AnimatePresence, AnimateSharedLayout } from "framer-motion";
 
+import { Link } from "react-router-dom";
+
 const Games = ({ genres }) => {
     const { data, error, isFetching, isLoading } = useFetchGamesQuery(genres);
 
@@ -39,28 +41,29 @@ const Games = ({ genres }) => {
                     ))}
             </AnimatePresence>
             {
-                (content = data.results.map((item) => (
-                    <div key={item.name} onClick={() => handleOpenGame(item)}>
-                        <Game item={item} />
-                    </div>
-                )))
+                (content = data.results.map((item) => {
+                    return (
+                        <div
+                            key={item.name}
+                            onClick={() => handleOpenGame(item)}
+                        >
+                            <Link to={`/${item.id}`}>
+                                <Game item={item} />
+                            </Link>
+                        </div>
+                    );
+                }))
             }
         </AnimateSharedLayout>;
     }
 
     return (
-        <Div>
-            <Cards>
-                {c1 && c1}
-                {content}
-            </Cards>
-        </Div>
+        <Cards>
+            {c1 && c1}
+            {content}
+        </Cards>
     );
 };
-
-const Div = styled.div`
-    margin-top: 8vh;
-`
 
 const Cards = styled.div`
     display: grid;

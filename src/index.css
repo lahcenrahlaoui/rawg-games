@@ -1,4 +1,14 @@
+
+
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 *{
+    
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -12,12 +22,12 @@
     background: transparent;
 }
 *::-webkit-scrollbar-thumb {
-    background-color: rgba(214, 47, 47, 0.5);
+    background-color: #ce0694 ; 
     border-radius: 220px;
     border: transparent;
 }
 
 .active{
-    background:rgb(111, 205, 130)
+    background:#ce0694
 }
 
