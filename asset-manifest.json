@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/rawg-games/static/css/main.e19ed879.css",
+    "main.js": "/rawg-games/static/js/main.d3d5a899.js",
+    "index.html": "/rawg-games/index.html",
+    "main.e19ed879.css.map": "/rawg-games/static/css/main.e19ed879.css.map",
+    "main.d3d5a899.js.map": "/rawg-games/static/js/main.d3d5a899.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e19ed879.css",
+    "static/js/main.d3d5a899.js"
+  ]
+}
