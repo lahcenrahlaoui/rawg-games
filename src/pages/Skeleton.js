@@ -1,28 +1,28 @@
 import classNames from "classnames";
 
+import styled from 'styled-components'
 
-const Skeleton = ({loop , className})=>{
-
+const Skeleton = ({ loop, className }) => {
     const palceHolders = [];
 
-    console.log("run ")
+    console.log("run ");
 
     const classes = classNames(
-        "h-10 p-2",
+        "h-48 p-2",
         "animate-shimmer",
         "absolute",
         "inset-0",
         "-traslate-x-full",
         "bg-gradient-to-r",
-        "from-blue-200",
+        "from-gray-200",
         "via-white",
-        "to-blue-200",
-        "overflow-hidden",
+        "to-gray-200"
     );
 
     const outSideClasses = classNames(
         "relative",
-        "bg-red-200",
+        "overflow-hidden",
+        "bg-gray-200",
         "mb-3",
         className
     );
@@ -37,8 +37,9 @@ const Skeleton = ({loop , className})=>{
 
     // const placeHolders = Array(loop).fill(0).map((_ , index)=>{ return <div key={index} />  })
     return palceHolders;
- 
-    
-}
+};
 
-export default Skeleton
+
+
+
+export default Skeleton;

@@ -8,6 +8,7 @@ import { useState } from "react";
 import { AnimatePresence, AnimateSharedLayout } from "framer-motion";
 
 import { Link } from "react-router-dom";
+import Skeleton from "./Skeleton";
 
 const Games = ({ genres }) => {
     const { data, error, isFetching, isLoading } = useFetchGamesQuery(genres);
@@ -21,7 +22,7 @@ const Games = ({ genres }) => {
             setTimeout(res, time);
         });
 
-    let c1 = undefined;
+    let gameDetails = undefined;
 
     const handleOpenGame = async (item) => {
         setCon(null);
@@ -34,7 +35,7 @@ const Games = ({ genres }) => {
         <AnimateSharedLayout>
             <AnimatePresence>
                 {con &&
-                    (c1 = (
+                    (gameDetails = (
                         <>
                             <GameDetails item={con} setCon={setCon} />
                         </>
@@ -55,11 +56,15 @@ const Games = ({ genres }) => {
                 }))
             }
         </AnimateSharedLayout>;
+    }else{
+        content = (
+            <Skeleton loop={20} className="h-48 w-full" />
+        )
     }
 
     return (
         <Cards>
-            {c1 && c1}
+            {gameDetails && gameDetails}
             {content}
         </Cards>
     );
@@ -75,5 +80,6 @@ const Cards = styled.div`
         max-height: 100%;
     }
 `;
+
 
 export default Games;

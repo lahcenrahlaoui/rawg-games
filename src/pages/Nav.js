@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { useFetchGenresQuery } from "../store";
 
 const Nav = ({ state, setState }) => {
@@ -39,7 +39,15 @@ const Nav = ({ state, setState }) => {
 
     return (
         <>
-            <nav className="flex items-center justify-between flex-wrap">
+            <NavStyle
+                className="flex
+
+                opacity-0 
+                transition duration-1000 opacity-100
+                
+                
+                items-center justify-between flex-wrap"
+            >
                 <div className="lg:hidden flex justify-between bg-red-500 w-full p-3">
                     <div className="flex items-center flex-shrink-0 text-white mr-6 lg:mr-72">
                         <Img
@@ -86,13 +94,28 @@ const Nav = ({ state, setState }) => {
                         {renderNav}
                     </Ul>
                 </div>
-            </nav>
+            </NavStyle>
         </>
     );
 };
 const Img = styled.img`
     width: 20px;
     height: 20px;
+`;
+
+const rotateslide = keyframes`
+    
+        from {
+            margin-top: -100px;
+            opacity: 0;}
+            to {opacity: 100%;
+            
+                margin-top: 0px;
+            }
+    
+`;
+const NavStyle = styled.nav`
+    animation: ${rotateslide} 1.5s;
 `;
 
 const Ul = styled.ul`
