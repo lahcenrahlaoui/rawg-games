@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/rawg-games/static/css/main.831969bc.css",
-    "main.js": "/rawg-games/static/js/main.d148d10b.js",
+    "main.js": "/rawg-games/static/js/main.42f88d6c.js",
     "index.html": "/rawg-games/index.html",
     "main.831969bc.css.map": "/rawg-games/static/css/main.831969bc.css.map",
-    "main.d148d10b.js.map": "/rawg-games/static/js/main.d148d10b.js.map"
+    "main.42f88d6c.js.map": "/rawg-games/static/js/main.42f88d6c.js.map"
   },
   "entrypoints": [
     "static/css/main.831969bc.css",
-    "static/js/main.d148d10b.js"
+    "static/js/main.42f88d6c.js"
   ]
 }
