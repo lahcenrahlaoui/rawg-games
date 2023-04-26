@@ -12,15 +12,29 @@ import {
 import { motion } from "framer-motion";
 
 import { BsNintendoSwitch } from "react-icons/bs";
+import { resizeImage } from "./resizeImage";
 
 const Game = ({ item }) => {
+    const rating = (item.rating / 5) * 100 + "%";
+
+  
+    
 
     return (
-        <Card  layoutId={item.name+"v"} >
-            <motion.div layoutId={item.name} >{item.name}</motion.div>
-            <motion.img src={item.background_image} layoutId={item.background_image} />
+        <Card layoutId={item.name + "v"}>
+            <motion.div layoutId={item.name}>{item.name}</motion.div>
+            <div className="div-height">
+                {item.background_image?.length && (
+                    <motion.img
+                        src={resizeImage(item.background_image, 640)}
+                        layoutId={item.background_image}
+                    />
+                )}
+            </div>
             <div>{item.released}</div>
-            <div>{item.rating}/5</div>
+
+            <Stars layoutId={item.rating} rating={rating}></Stars>
+
             {/* <Platforms>
                 {item.platforms.map((p) => {
                     switch (p.platform.slug) {
@@ -70,7 +84,7 @@ const Game = ({ item }) => {
                             return;
                     }
                 })}
-            </Platforms> */}
+            </Platforms>  */}
         </Card>
     );
 };
@@ -91,13 +105,38 @@ const Card = styled(motion.div)`
     justify-content: space-around;
     flex-direction: column;
     width: 400px;
-    height: 300px;
+    height: 450px;
     border-radius: 20px;
+    overflow: hidden;
+
+    .div-height {
+        height: 50vh;
+    }
+
     img {
-        max-width: 100%;
-        max-height: 100%;
+        object-fit: cover;
+        height: 100%;
+        display: block;
     }
     margin: 20px auto;
+`;
+
+const Stars = styled(motion.div)`
+    font-size: 20px;
+    font-family: Times;
+
+    &:before {
+        content: "★★★★★";
+        letter-spacing: 3px;
+        background: linear-gradient(
+            90deg,
+            #fc0 ${(props) => props.rating},
+            #bebebe ${(props) => props.rating}
+        );
+
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
 `;
 
 export default Game;

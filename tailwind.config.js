@@ -10,17 +10,21 @@ module.exports = {
             keyframes: {
                 shimmer: {
                     "100%": { transform: "translateX(100%)" },
-                },
-                custom: {
-                    "100%": {
-                        from: "translateY(-100%)",
-                        to: "translateY(0%)",
+                }, 
+                bouncex: {
+                    "0%, 100%": {
+                        transform: "translateX(-25%)",
+                        animationTimingFunction: "cubic-bezier(0.8,0,1,1)",
+                    },
+                    "50%": {
+                        transform: "none",
+                        animationTimingFunction: "cubic-bezier(0,0,0.2,1)",
                     },
                 },
             },
             animation: {
                 shimmer: "shimmer 2s infinite",
-                custom: "custom 2s ",
+                bouncex: "bouncex 2s infinite",
             },
         },
     },

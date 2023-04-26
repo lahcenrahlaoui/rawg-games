@@ -1,53 +1,47 @@
 import { useState } from "react";
 
-import styled, { keyframes } from "styled-components";
-import { useFetchGenresQuery } from "../store";
+import { useFetchGenresQuery } from "../../store";
+import NavItem from "./NavItem";
 
-const Nav = ({ state, setState }) => {
+import classNames from "classnames";
+
+import { NavStyle, UnorderList, Img } from "./Nav.Styled";
+
+const Nav = ({ state, setState, setPage }) => {
     const { data, isFetching, error } = useFetchGenresQuery();
 
+    // check navbar status
     const [isOpen, setIsOpen] = useState(false);
 
-    let renderNav;
+    let renderNavItems;
 
     const handleClick = (e) => {
-        console.log(e.target.id);
         setState(e.target.id);
-
+        setPage(1);
         setIsOpen(false);
     };
 
     if (!isFetching) {
-        console.log(data);
-        renderNav = data.results.map((item, idx) => {
+        renderNavItems = data.results.map((item, idx) => {
             return (
-                <li
-                    className={`capitalize text-white ${
-                        state === item.slug ? "active" : ""
-                    }  `}
+                <NavItem
                     key={item.slug}
-                    id={item.slug}
-                    onClick={handleClick}
-                >
-                    {item.name.includes(" ")
-                        ? item.name.split(" ")[1]
-                        : item.name}
-                </li>
+                    item={item}
+                    idx={idx}
+                    handleClick={handleClick}
+                />
             );
         });
     }
 
+    const navStyles = classNames(`flex 
+                                opacity-0 
+                                transition duration-1000 opacity-100
+                                items-center justify-between flex-wrap`);
+
     return (
         <>
-            <NavStyle
-                className="flex
-
-                opacity-0 
-                transition duration-1000 opacity-100
-                
-                
-                items-center justify-between flex-wrap"
-            >
+            <NavStyle className={navStyles}>
                 <div className="lg:hidden flex justify-between bg-red-500 w-full p-3">
                     <div className="flex items-center flex-shrink-0 text-white mr-6 lg:mr-72">
                         <Img
@@ -89,61 +83,11 @@ const Nav = ({ state, setState }) => {
                         isOpen ? "block" : "hidden"
                     }`}
                 >
-                    <Ul>
-                        {/* {renderNav1} */}
-                        {renderNav}
-                    </Ul>
+                    <UnorderList>{renderNavItems}</UnorderList>
                 </div>
             </NavStyle>
         </>
     );
 };
-const Img = styled.img`
-    width: 20px;
-    height: 20px;
-`;
-
-const rotateslide = keyframes`
-    
-        from {
-            margin-top: -100px;
-            opacity: 0;}
-            to {opacity: 100%;
-            
-                margin-top: 0px;
-            }
-    
-`;
-const NavStyle = styled.nav`
-    animation: ${rotateslide} 1.5s;
-`;
-
-const Ul = styled.ul`
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, 10%);
-    list-style-type: none;
-    background: #141029;
-    @media only screen and (max-width: 991px) {
-        grid-template-columns: repeat(auto-fit, 100%);
-
-        li {
-            justify-content: start;
-        }
-    }
-    li {
-        text-transform: capitalize;
-        display: flex;
-        padding: 5px 10px;
-        justify-content: center;
-        align-items: center;
-
-        height: 50px;
-        &:hover {
-            background: #3d55ea;
-        }
-        cursor: pointer;
-    }
-`;
 
 export default Nav;

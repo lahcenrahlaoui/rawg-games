@@ -1,85 +1,121 @@
 import { useFetchGamesQuery } from "../store";
 
-import styled from "styled-components";
+import { Link, useNavigate } from "react-router-dom";
+
+import { AnimatePresence, AnimateSharedLayout } from "framer-motion";
 
 import Game from "./Game";
 import GameDetails from "./GameDetails";
-import { useState } from "react";
-import { AnimatePresence, AnimateSharedLayout } from "framer-motion";
-
-import { Link } from "react-router-dom";
 import Skeleton from "./Skeleton";
 
-const Games = ({ genres }) => {
-    const { data, error, isFetching, isLoading } = useFetchGamesQuery(genres);
+import { useState, useRef, useCallback } from "react";
+
+const Games = ({ genres, page, search, setPage }) => {
+    // thsi state to display one game over others
+    const [con, setCon] = useState(null);
+
+    const { data, error, isFetching, isLoading } = useFetchGamesQuery({
+        genres,
+        search,
+        page,
+    });
 
     let content;
 
-    const [con, setCon] = useState(null);
+    const observer = useRef();
+    const lastGameElementRef = useCallback(
+        (node) => {
+            if (isLoading) return;
+            if (observer.current) observer.current.disconnect();
+            observer.current = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    setPage((prevPageNumber) => prevPageNumber + 1);
+                }
+            });
+            if (node) observer.current.observe(node);
+        },
+        [isLoading]
+    );
 
+    /*****
+     * thread stop a while
+     */
     const stop = (time) =>
         new Promise((res) => {
             setTimeout(res, time);
         });
-
+    /**** this is from one game click  */
     let gameDetails = undefined;
-
     const handleOpenGame = async (item) => {
         setCon(null);
-        await stop(350);
+        // await stop(3500);
         if (item !== con) {
             setCon(item);
         }
     };
+
+    // if we fetch all the data we go inside this block condition
+
+    if (!isFetching && data.count === 0) {
+        return <div className=""> there is no data </div>;
+    }
+
     if (!isFetching && !isLoading) {
         <AnimateSharedLayout>
             <AnimatePresence>
                 {con &&
                     (gameDetails = (
                         <>
-                            <GameDetails item={con} setCon={setCon} />
+                            <GameDetails
+                                item={con}
+                                id={con.id}
+                                imgs={con.short_screenshots}
+                                setCon={setCon}
+                            />
                         </>
                     ))}
             </AnimatePresence>
             {
-                (content = data.results.map((item) => {
-                    return (
-                        <div
-                            key={item.name}
-                            onClick={() => handleOpenGame(item)}
-                        >
-                            <Link to={`/${item.id}`}>
-                                <Game item={item} />
-                            </Link>
-                        </div>
-                    );
+                (content = data?.results?.map((item, index) => {
+                    if (data?.results?.length === index + 1) {
+                        return (
+                            <div
+                                ref={lastGameElementRef}
+                                key={item.id}
+                                onClick={() => handleOpenGame(item)}
+                            >
+                                <Link to={`/rawg-games/${item.id}`}>
+                                    <Game item={item} />
+                                </Link>
+                            </div>
+                        );
+                    } else {
+                        return (
+                            <div
+                                key={item.id}
+                                onClick={() => {
+                                    handleOpenGame(item);
+                                }}
+                            >
+                                <Link to={`/rawg-games/${item.id}`}>
+                                    <Game item={item} />
+                                </Link>
+                            </div>
+                        );
+                    }
                 }))
             }
         </AnimateSharedLayout>;
-    }else{
-        content = (
-            <Skeleton loop={20} className="h-48 w-full" />
-        )
+    } else {
+        content = <Skeleton loop={20} className="h-48 w-full" />;
     }
 
     return (
-        <Cards>
+        <>
             {gameDetails && gameDetails}
             {content}
-        </Cards>
+        </>
     );
 };
-
-const Cards = styled.div`
-    display: grid;
-
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 1rem;
-    img {
-        max-width: 100%;
-        max-height: 100%;
-    }
-`;
-
 
 export default Games;

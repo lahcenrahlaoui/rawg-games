@@ -1,13 +1,19 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {
+    BrowserRouter,
+    HashRouter,
+    Routes,
+    Route,
+    browserHistory,
+} from "react-router-dom";
 import Home from "./pages/Home";
 const App = () => {
     return (
         <div className="App">
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/:id" element={<Home />} />
+                    <Route exact path="/rawg-games" element={<Home />} />
+                    <Route path="/rawg-games/:id" element={<Home />} />
                 </Routes>
             </BrowserRouter>
         </div>

@@ -5,8 +5,8 @@ import styled from 'styled-components'
 const Skeleton = ({ loop, className }) => {
     const palceHolders = [];
 
-    console.log("run ");
 
+    
     const classes = classNames(
         "h-48 p-2",
         "animate-shimmer",
