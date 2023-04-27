@@ -1,16 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFetchGenresQuery } from "../../store";
 
 import classNames from "classnames";
 
-// components 
+// components
 import NavItem from "./NavItem";
 // styles
 import { NavStyle, UnorderList, Img } from "./Nav.Styled";
 
+import logo from "../../images/logo-games.png";
 
-
-const Nav = ({ activeLink, setState, setPage }) => {
+const Nav = ({ activeLink, setActiveLink, setPage }) => {
     const { data, isFetching, error } = useFetchGenresQuery();
 
     // check navbar status
@@ -19,13 +19,20 @@ const Nav = ({ activeLink, setState, setPage }) => {
     let renderNavItems;
 
     const handleClick = (e) => {
-        setState(e.target.id);
+        setActiveLink(e.target.id);
         setPage(1);
         setIsOpen(false);
     };
 
+    useEffect(() => {
+        if (!activeLink) {
+            setActiveLink(data?.results[0].slug);
+        }
+    }, [isFetching]);
     if (!isFetching) {
-        // setState(data.results[0].slug)
+        // console.log(data.)
+
+        console.log(data?.results[0].slug);
         renderNavItems = data.results.map((item, idx) => {
             return (
                 <NavItem
@@ -48,13 +55,8 @@ const Nav = ({ activeLink, setState, setPage }) => {
         <>
             <NavStyle className={navStyles}>
                 <div className="lg:hidden flex justify-between bg-red-500 w-full p-3">
-                    <div className="flex items-center flex-shrink-0 text-white mr-6 lg:mr-72">
-                        <Img
-                            src={
-                                "https://cdn1.vectorstock.com/i/1000x1000/39/60/games-logo-with-gamepad-vector-27523960.jpg"
-                            }
-                            alt="d"
-                        />
+                    <div className="flex items-center  shrink-0 text-white mr-6 lg:mr-72">
+                        {/* <Img src={logo} alt="d" /> */}
                     </div>
 
                     <div className=" ">

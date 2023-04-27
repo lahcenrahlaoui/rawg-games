@@ -5,11 +5,12 @@ import { Link } from "react-router-dom";
 import { AnimatePresence, AnimateSharedLayout } from "framer-motion";
 
 // components
-import Game from "./Game";
+import Game from "../game/Game";
 import GameDetails from "./GameDetails";
 import Skeleton from "../Skeleton";
 
 import { useState, useRef, useCallback } from "react";
+import { resizeImage } from "../resizeImage";
 
 const Games = ({ genres, page, search, setPage }) => {
     // thsi state to display one game over others
@@ -55,7 +56,7 @@ const Games = ({ genres, page, search, setPage }) => {
     if (!isFetching && !isLoading) {
         <AnimateSharedLayout>
             <AnimatePresence>
-                {displayedGame  &&
+                {displayedGame &&
                     (gameDetails = (
                         <>
                             <GameDetails
@@ -99,7 +100,7 @@ const Games = ({ genres, page, search, setPage }) => {
             }
         </AnimateSharedLayout>;
     } else {
-        content = <Skeleton loop={20} className="h-48 w-full" />;
+        content = <Skeleton loop={20} className="h-48 w-64" />;
     }
 
     return (

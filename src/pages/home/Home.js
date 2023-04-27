@@ -9,7 +9,7 @@ import Nav from "../navbar/Nav";
 import SearchForm from "../SearchForm";
 
 const Home = () => {
-    const [activeLink, setActiveLink] = useState("action");
+    const [activeLink, setActiveLink] = useState("");
     const [search, setSearch] = useState("");
     const [page, setPage] = useState(1);
 
@@ -31,7 +31,7 @@ const Home = () => {
     content = (
         <Nav
             activeLink={activeLink}
-            setActiveLink={activeLink}
+            setActiveLink={setActiveLink}
             setPage={setPage}
         />
     );
@@ -40,7 +40,7 @@ const Home = () => {
             <>
                 <Nav
                     activeLink={activeLink}
-                    setActiveLink={activeLink}
+                    setActiveLink={setActiveLink}
                     setPage={setPage}
                 />
                 <SearchForm search={search} setSearch={setSearch} />

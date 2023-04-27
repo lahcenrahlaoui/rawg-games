@@ -2,38 +2,43 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 
 export const Fixed = styled(motion.div)`
-    width: 100vw;
+
+    width: 80vw;
     height: 86vh;
     position: fixed;
     display: flex;
-    top:10%;
-    /* justify-content: center; */
-    /* align-items: center; */
+    top: 10%;
+    z-index: 10000;
+
 `;
 
 export const Card = styled(motion.div)`
     background: white;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
-    width: 90%;
-    height: 100%;
- 
-    overflow: scroll;
-
-    position: absolute;
-    /* top: 50%;
-    left: 50%;
-    transform: translate(-50%, -55%); */
-    z-index: 10000;
-
-    .div-height {
-        height: 60vh;
-    }
-    img {
+     img {
+        padding: 20px;
         object-fit: cover;
         height: 100%;
         display: block;
     }
+   
+
+    overflow: scroll;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -55%);
+    width: 100%;
+    height: 100%;
+    .div-height {
+        display: flex;
+
+        padding: 20px;
+        /* height: 60vh; */
+    }
+   
 `;
 
 export const Stars = styled(motion.div)`
@@ -55,13 +60,13 @@ export const Stars = styled(motion.div)`
 `;
 
 export const Platforms = styled.div`
-    display: flex;   
-    
+    display: flex;
+
     justify-content: center;
 `;
 export const PlatformPadding = styled.div`
     padding: 25px;
-    font-size:200%;
+    font-size: 200%;
 `;
 
 export const Images = styled.div`
@@ -74,12 +79,11 @@ export const Images = styled.div`
         width: 100%;
         display: block;
         padding: 5px;
-        &:hover{
+        &:hover {
             /* position:fixed; */
-            transform :scale(0.95) ; 
-            transition : 0.8s all ease-in-out; 
-             /* padding: 200px  300px ; */
-
-       }
+            transform: scale(0.95);
+            transition: 0.8s all ease-in-out;
+            /* padding: 200px  300px ; */
+        }
     }
 `;
