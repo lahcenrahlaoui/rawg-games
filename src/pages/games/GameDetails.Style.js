@@ -3,12 +3,12 @@ import styled from "styled-components";
 
 export const Fixed = styled(motion.div)`
     width: 100vw;
-    height: 80vh;
+    height: 86vh;
     position: fixed;
     display: flex;
-
-    justify-content: center;
-    align-items: center;
+    top:10%;
+    /* justify-content: center; */
+    /* align-items: center; */
 `;
 
 export const Card = styled(motion.div)`
@@ -17,14 +17,13 @@ export const Card = styled(motion.div)`
 
     width: 90%;
     height: 100%;
-    /* padding: 5%; */
-
+ 
     overflow: scroll;
 
     position: absolute;
-    top: 50%;
+    /* top: 50%;
     left: 50%;
-    transform: translate(-50%, -55%);
+    transform: translate(-50%, -55%); */
     z-index: 10000;
 
     .div-height {
@@ -62,7 +61,7 @@ export const Platforms = styled.div`
 `;
 export const PlatformPadding = styled.div`
     padding: 25px;
-    font-size:200%
+    font-size:200%;
 `;
 
 export const Images = styled.div`
@@ -76,13 +75,11 @@ export const Images = styled.div`
         display: block;
         padding: 5px;
         &:hover{
-
-
-            position:fixed;
+            /* position:fixed; */
             transform :scale(0.95) ; 
             transition : 0.8s all ease-in-out; 
-             padding: 50px  0 ;
-             margin: 0;
-        }
+             /* padding: 200px  300px ; */
+
+       }
     }
 `;

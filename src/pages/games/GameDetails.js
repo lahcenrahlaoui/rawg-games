@@ -13,7 +13,6 @@ import {
     Images,
 } from "./GameDetails.Style";
 
-
 import Platforms from "./Platforms";
 
 import { useNavigate } from "react-router-dom";
@@ -76,16 +75,18 @@ const GameDetails = ({ item, id, imgs, setDisplayedGame }) => {
                 </div>
 
                 <h1 className="text-center p-2 text-3xl">Platforms</h1>
-                        <Platforms item={item} />
+                <Platforms item={item} />
                 <div className="p-10">{item.description_raw}</div>
 
-                {item.background_image[0] && (
-                    <Images className="flex flex-wrap ">
-                        {imgs.map((img, idx) => {
-                            if (idx !== 0) return <img src={img.image} />;
-                        })}
-                    </Images>
-                )}
+                <div>
+                    {item.background_image[0] && (
+                        <Images className="flex flex-wrap ">
+                            {imgs.map((img, idx) => {
+                                if (idx !== 0) return <img src={img.image} />;
+                            })}
+                        </Images>
+                    )}
+                </div>
                 <div className="flex justify-center p-4">
                     <button
                         className="button-30"

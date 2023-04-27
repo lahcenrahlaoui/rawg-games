@@ -8,7 +8,7 @@ export const Cards = styled.div`
     flex-flow: row wrap;
     overflow: scroll;
 
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1rem;
     img {
         max-width: 100%;

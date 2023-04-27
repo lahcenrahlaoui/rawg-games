@@ -4,16 +4,16 @@ const SearchForm = ({ search, setSearch }) => {
     };
 
     return (
-        <div className="flex justify-center p-4 ">
+        <div className="flex justify-center p-2 ">
             <input
                 value={search}
                 onChange={handleChangeForm}
-                placeholder="game"
-                className="p-4 bg-gray-200 
+                placeholder="search"
+                className="p-2 bg-gray-200 
                                     rounded-lg
                                     outline-0 
-                                    text-2xl 
-                                    capitalize w-1/6"
+                                    text-xl 
+                                    capitalize w-1/10 text-center"
             />
         </div>
     );
