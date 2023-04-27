@@ -1,13 +1,16 @@
 import { useState } from "react";
-
 import { useFetchGenresQuery } from "../../store";
-import NavItem from "./NavItem";
 
 import classNames from "classnames";
 
+// components 
+import NavItem from "./NavItem";
+// styles
 import { NavStyle, UnorderList, Img } from "./Nav.Styled";
 
-const Nav = ({ state, setState, setPage }) => {
+
+
+const Nav = ({ activeLink, setState, setPage }) => {
     const { data, isFetching, error } = useFetchGenresQuery();
 
     // check navbar status
@@ -22,9 +25,11 @@ const Nav = ({ state, setState, setPage }) => {
     };
 
     if (!isFetching) {
+        // setState(data.results[0].slug)
         renderNavItems = data.results.map((item, idx) => {
             return (
                 <NavItem
+                    activeLink={activeLink}
                     key={item.slug}
                     item={item}
                     idx={idx}

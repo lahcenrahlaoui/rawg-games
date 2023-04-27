@@ -6,7 +6,7 @@ import {
     Route,
     browserHistory,
 } from "react-router-dom";
-import Home from "./pages/Home";
+import Home from "./pages/home/Home";
 const App = () => {
     return (
         <div className="App">

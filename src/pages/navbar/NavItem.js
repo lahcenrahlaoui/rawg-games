@@ -1,11 +1,11 @@
 
 
 
-const NavItem = ({ state, item, handleClick }) => {
+const NavItem = ({ activeLink, item, handleClick }) => {
     return (
         <li
             className={`capitalize text-white ${
-                state === item.slug ? "active" : ""
+                activeLink === item.slug ? "active" : ""
             }  `}
             id={item.slug}
             onClick={handleClick}

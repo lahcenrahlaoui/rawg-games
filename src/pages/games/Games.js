@@ -1,19 +1,19 @@
-import { useFetchGamesQuery } from "../store";
+import { useFetchGamesQuery } from "../../store";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { AnimatePresence, AnimateSharedLayout } from "framer-motion";
 
+// components
 import Game from "./Game";
 import GameDetails from "./GameDetails";
-import Skeleton from "./Skeleton";
+import Skeleton from "../Skeleton";
 
 import { useState, useRef, useCallback } from "react";
 
 const Games = ({ genres, page, search, setPage }) => {
     // thsi state to display one game over others
-    const [con, setCon] = useState(null);
-
+    const [displayedGame, setDisplayedGame] = useState(null);
     const { data, error, isFetching, isLoading } = useFetchGamesQuery({
         genres,
         search,
@@ -37,20 +37,12 @@ const Games = ({ genres, page, search, setPage }) => {
         [isLoading]
     );
 
-    /*****
-     * thread stop a while
-     */
-    const stop = (time) =>
-        new Promise((res) => {
-            setTimeout(res, time);
-        });
     /**** this is from one game click  */
     let gameDetails = undefined;
     const handleOpenGame = async (item) => {
-        setCon(null);
-        // await stop(3500);
-        if (item !== con) {
-            setCon(item);
+        setDisplayedGame(null);
+        if (item !== displayedGame) {
+            setDisplayedGame(item);
         }
     };
 
@@ -63,14 +55,14 @@ const Games = ({ genres, page, search, setPage }) => {
     if (!isFetching && !isLoading) {
         <AnimateSharedLayout>
             <AnimatePresence>
-                {con &&
+                {displayedGame  &&
                     (gameDetails = (
                         <>
                             <GameDetails
-                                item={con}
-                                id={con.id}
-                                imgs={con.short_screenshots}
-                                setCon={setCon}
+                                item={displayedGame}
+                                id={displayedGame.id}
+                                imgs={displayedGame.short_screenshots}
+                                setDisplayedGame={setDisplayedGame}
                             />
                         </>
                     ))}

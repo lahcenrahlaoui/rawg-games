@@ -12,13 +12,10 @@ import {
 import { motion } from "framer-motion";
 
 import { BsNintendoSwitch } from "react-icons/bs";
-import { resizeImage } from "./resizeImage";
+import { resizeImage } from "../resizeImage";
 
 const Game = ({ item }) => {
     const rating = (item.rating / 5) * 100 + "%";
-
-  
-    
 
     return (
         <Card layoutId={item.name + "v"}>

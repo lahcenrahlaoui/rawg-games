@@ -4,12 +4,12 @@ import { useState } from "react";
 import { Cards } from "./Home.Styled";
 
 // components
-import Games from "./Games";
-import Nav from "./navbar/Nav";
-import SearchForm from "./SearchForm";
+import Games from "../games/Games";
+import Nav from "../navbar/Nav";
+import SearchForm from "../SearchForm";
 
 const Home = () => {
-    const [state, setState] = useState("action");
+    const [activeLink, setActiveLink] = useState("action");
     const [search, setSearch] = useState("");
     const [page, setPage] = useState(1);
 
@@ -24,15 +24,25 @@ const Home = () => {
                 page={j}
                 search={search}
                 setPage={setPage}
-                genres={state}
+                genres={activeLink}
             />
         );
     }
-    content = <Nav state={state} setState={setState} setPage={setPage} />;
-    if (state) {
+    content = (
+        <Nav
+            activeLink={activeLink}
+            setActiveLink={activeLink}
+            setPage={setPage}
+        />
+    );
+    if (activeLink) {
         content = (
             <>
-                <Nav state={state} setState={setState} setPage={setPage} />
+                <Nav
+                    activeLink={activeLink}
+                    setActiveLink={activeLink}
+                    setPage={setPage}
+                />
                 <SearchForm search={search} setSearch={setSearch} />
                 <Cards>{renderGames}</Cards>
             </>
