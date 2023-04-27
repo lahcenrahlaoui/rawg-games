@@ -10,7 +10,7 @@ import { NavStyle, UnorderList, Img } from "./Nav.Styled";
 
 import logo from "../../images/logo-games.png";
 
-const Nav = ({ activeLink, setActiveLink, setPage }) => {
+const Nav = ({ activeLink, setActiveLink, setPage, setSearch }) => {
     const { data, isFetching, error } = useFetchGenresQuery();
 
     // check navbar status
@@ -20,6 +20,7 @@ const Nav = ({ activeLink, setActiveLink, setPage }) => {
 
     const handleClick = (e) => {
         setActiveLink(e.target.id);
+
         setPage(1);
         setIsOpen(false);
     };
@@ -29,9 +30,10 @@ const Nav = ({ activeLink, setActiveLink, setPage }) => {
             setActiveLink(data?.results[0].slug);
         }
     }, [isFetching]);
-    if (!isFetching) {
-        // console.log(data.)
 
+    if (!isFetching) {
+
+        
         console.log(data?.results[0].slug);
         renderNavItems = data.results.map((item, idx) => {
             return (
@@ -56,7 +58,7 @@ const Nav = ({ activeLink, setActiveLink, setPage }) => {
             <NavStyle className={navStyles}>
                 <div className="lg:hidden flex justify-between bg-red-500 w-full p-3">
                     <div className="flex items-center  shrink-0 text-white mr-6 lg:mr-72">
-                        {/* <Img src={logo} alt="d" /> */}
+                        <Img src={logo} alt="d" />
                     </div>
 
                     <div className=" ">

@@ -1,6 +1,3 @@
-
-
-
 const NavItem = ({ activeLink, item, handleClick }) => {
     return (
         <li

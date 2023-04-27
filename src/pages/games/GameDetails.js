@@ -63,7 +63,7 @@ const GameDetails = ({ item, id, imgs, setDisplayedGame }) => {
                                     scale: [0.95],
                                     rotate: 360,
                                 }}
-
+                                transition={{ type: "spring", stiffness: 100 }}
                                 src={resizeImage(item.background_image, 640)}
 
                                 />
